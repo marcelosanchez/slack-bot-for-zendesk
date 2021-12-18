@@ -1,2 +1,2 @@
-# slack-bot-for-zendesk
-Bot de Slack, que monitorea la creación de nuevos tickets en Zendesk 
+# slack-bot-zd
+Bot de Slack para notificar tickets de Zendesk
