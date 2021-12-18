@@ -134,3 +134,4 @@ dmypy.json
 
 # Secret files
 creds_zendesk.json
+*.json
