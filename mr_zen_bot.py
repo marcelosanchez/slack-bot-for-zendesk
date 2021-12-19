@@ -9,6 +9,7 @@ channel = os.environ['BOT_CHANNEL']
 
 
 async def tickets_monitor():
+    TIEMPO_ESPERA = 60
     while True:
         print("[" + str(datetime.now()) + "] ** Buscando nuevos tickets")
         tickets_notificados = 0
@@ -23,7 +24,7 @@ async def tickets_monitor():
                 tickets_notificados += 1
         print(str(tickets_notificados) + " tickets notificados!")
         print("[" + str(datetime.now()) + "] ** Fin de la busqueda")
-        await asyncio.sleep(60)  # 60
+        await asyncio.sleep(TIEMPO_ESPERA)  # Tiempo de espera
 
 loop = asyncio.get_event_loop()
 try:
