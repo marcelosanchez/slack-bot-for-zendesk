@@ -45,7 +45,7 @@ class Ticket:
         tickets_list = []
         for ticket in tickets:
             tickets_list.append(Ticket(ticket.to_dict()))
-        print(str(len(tickets_list)) + " tickets nuevos!")
+        # print(str(len(tickets_list)) + " tickets nuevos!")
         return tickets_list
 
     def ticket_as_msg(self):
@@ -60,6 +60,34 @@ class Ticket:
         ticket.comment = Comment(body="Se cambió el estado del ticket, es necesario responderlo, lo más pronto posible.", public=False)
         ticket.status = 'pending'
         zenpy_client.tickets.update(ticket)
+        self.registrar_ticket_procesado()
+
+    def registrar_ticket_procesado(self):
+        file_name = "t_procesados"
+        with open(file_name, 'r+') as f:
+            procesados_str = f.read()
+            lista_procesados = procesados_str.split(",")
+            lista_procesados.append(str(self.id))
+            tickets_list = list(set(lista_procesados))
+            if tickets_list:
+                nuevos_procesados_str = ",".join(tickets_list)
+            else:
+                nuevos_procesados_str = str(self.id) + ","
+            f.seek(0)
+            f.write(nuevos_procesados_str)
+            f.truncate()
+            f.close()
+
+    def fue_notificado(self):
+        file_name = "t_procesados"
+        with open(file_name, 'r+') as f:
+            procesados_str = f.read()
+            lista_procesados = procesados_str.split(",")
+            f.close()
+            if str(self.id) in lista_procesados:
+                return True
+            else:
+                return False
 
     def get_canal_display(self):
         if self.canal == Ticket.CANAL_EMAIL:
