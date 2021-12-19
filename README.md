@@ -1,4 +1,4 @@
-# slack-bot-zd
+# MrZen Bot (Slack)
 Bot de Slack para notificar tickets de Zendesk
 
 1. Instalar las dependencias.
