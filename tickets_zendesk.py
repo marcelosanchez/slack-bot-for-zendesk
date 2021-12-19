@@ -80,7 +80,14 @@ class Ticket:
             return ":white_circle: Desconocido"
 
     def get_fecha_display(self):
-        return ":date: " + self.fecha_creacion
+        import datetime
+        from datetime import timedelta
+
+        date_time_str = self.fecha_creacion
+        date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%dT%H:%M:%SZ')
+        date_time_obj = date_time_obj - timedelta(hours=5)  # Para convertirlo al GMT-05
+        date_str = date_time_obj.strftime("%a, %d/%m/%y, %H:%M:%S")
+        return ":date: " + date_str
 
     def get_sitio_display(self):
         return "comextweb_logo: Comextweb - web_app"
@@ -109,6 +116,9 @@ class Ticket:
                 }
             },
             {
+                "type": "divider",
+            },
+            {
                 "type": "section",
                 "fields": [
                     {
@@ -134,12 +144,12 @@ class Ticket:
                     }
                 ]
             },
-            # {
-            #     "type": "section",
-            #     "text": {
-            #         "type": "mrkdwn",
-            #         "text": "<https://www.google.com|Ir al enlace>"
-            #     }
-            # }
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "<https://comextweb.zendesk.com/agent/tickets/" + str(self.id) + "|Ver ticket en Zendesk>"
+                }
+            }
         ]
         return json_block
