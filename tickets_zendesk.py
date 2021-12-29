@@ -176,7 +176,7 @@ class Ticket:
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "<https://comextweb.zendesk.com/agent/tickets/" + str(self.id) + "|Ver ticket en Zendesk>"
+                    "text": "<https://comextweb.zendesk.com/agent/tickets/" + str(self.id) + "|Ver ticket en Zendesk :zendesk_logo:>"
                 }
             }
         ]

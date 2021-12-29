@@ -9,7 +9,7 @@ channel = os.environ['BOT_CHANNEL']
 
 
 async def tickets_monitor():
-    TIEMPO_ESPERA = 60
+    TIEMPO_ESPERA = 60  # segundos
     while True:
         print("[" + str(datetime.now()) + "] ** Buscando nuevos tickets")
         tickets_notificados = 0
